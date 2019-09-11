@@ -5,30 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 
-
-    <%= include("partials/_seo.html") %>
-
-
-    <title>Hello, world!</title>
+    <title>In-class coding Exercises</title>
   </head>
   <body>
     <div class="container">
 
       <header class="row justify-content-center text-center mt-5 font-weight-bold">
-        <h1 class="col-12 display-4 font-weight-bold"><%= basicinfo.name %></h1>
-        <p class="lead col-12"><%= basicinfo.title %></p>
+        <h1 class="col-12 display-5 font-weight-bold">J233 In-Class Coding Exercises</h1>
       </header>
-      <nav class="socialmedia text-center">
-        <%= loop(basicinfo.socialmedia, '<a href="${url}" title="${title}"><img src="${icon}" alt="Social Media Icon" class="d-inline p-2" width="40" height="auto"></a>') %>
-      </nav>
+
       <div class="row justify-content-center mt-3">
         <div class="col-11 col-sm-8 col-md-6 lead-description">
-          <p class="h3 text-center"><%= basicinfo.description %></p>
+          <p class="h3 text-center">These are exercises we will use in the J233 Advanced Coding. Click on the appropriate exercise below to see the output of the page.</p>
         </div>
       </div>
 
       <div class="row justify-content-center mt-5">
-        <%= loop(basicinfo.portfolio, '<div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-3"><div class="card"><a href="${url}" target="_blank"><img class="img-fluid" src="${photo}" alt="Project thumbnail"></a><div class="card-body"><h5 class="card-title">${title}</h5><p class="card-text">${description}</p></div></div></div>') %>
+        <%= loop(exercises, '<div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-3"><div class="card"><a href="${url}"><img class="img-fluid" src="${thumbnail}" alt="Project thumbnail"></a><div class="card-body"><h5 class="card-title">${title}</h5><p class="card-text">${description}</p><p><span class="badge badge-info">${lesson}</span></p></div></div></div>') %>
       </div>
 
 

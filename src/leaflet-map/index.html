@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+    <title>In-class coding exercise | Leaflet Map</title>
+    <style>
+    	#holder{height: 80vh;width:90vw;margin:10px auto;}
+    </style>
+  </head>
+  <body>
+  	<div id="holder"></div>
+    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap-4.3.1.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/leaflet.js"></script>
+
+    <script>
+
+      /*******************  START HERE ********************
+  
+       *  Arrays Example File
+       *
+       *  Instruction: Create a 2D array called "places" with the data for each marker on the map.
+       *  Each array inside the places should have the latitude and longitude for that place.
+       *
+       *  Use these latitude and longitude coordinates:
+       *
+       *  40.452107, 93.742118
+       *  52.479748, 62.185657
+       *  50.844080, -0.172152
+       *  -18.529292,-70.249907
+       *  51.848557, -0.554484
+
+
+      ******************************************************/
+
+
+     
+
+
+
+
+
+
+
+
+
+
+
+      /******** DONT EDIT BELOW THIS LINE ******************/
+
+
+      //setup initial map
+      var mymap = L.map('holder').setView([41.51049583, 7.192751961], 2);
+
+
+      var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+      }).addTo(mymap);
+
+
+      var places = places || [];
+
+
+      let layers = {}
+
+      //convert lat and long to google coordinates
+      for(let i=0; i<places.length; ++i){
+        let m = L.marker(places[i])
+          .on('click', function(evt){
+            mymap.flyTo(evt.latlng,15,{animate: true});
+          })
+          .addTo(mymap);
+
+        let name = places[i].slice(',').join(',');
+        layers[name] = m;
+      }
+
+      //L.control.layers({},layers, {collapsed:false}).addTo(mymap);
+ 
+
+
+
+    </script>
+  </body>
+</html>
