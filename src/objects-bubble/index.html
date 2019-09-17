@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+    <title>In-class coding Exercises</title>
+    <style>
+    	.holder{height: 50vh;width:50vh;margin:10px auto;}
+    </style>
+  </head>
+  <body>
+  	<div class="holder"></div>
+    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap-4.3.1.bundle.min.js"></script>
+    <script type="text/javascript" src="../js/d3-5.9.7.min.js"></script>
+    <script>
+
+      /*******************  START HERE ********************
+
+
+      Step 1) Create a variable called "data"
+
+      Step 2) Assign an ARRAY of OBJECTS. Each object should have properties "title" and "value". The title can be any string, and the value should be a number.
+
+      Run this file. Then, change up some of the numbers.
+
+
+      ******************************************************/
+
+
+     
+
+
+
+
+
+
+
+
+
+
+
+      /******** DONT EDIT BELOW THIS LINE ******************/
+
+      var diameter = 500, //max size of the bubbles
+          format   = d3.format(",d"),
+          color    = d3.scaleOrdinal(d3.schemeCategory10);
+          //more color options: https://github.com/d3/d3-scale-chromatic
+
+      var bubble = d3.pack()
+          .size([diameter, diameter])
+          .padding(1.5);
+
+      var svg = d3.select(".holder")
+          .append("svg")
+          .attr("width", "100%")
+          .attr("height", "100%")
+          .attr("viewBox", "0 0 " + diameter + " " + diameter)
+          .attr("class", "bubble");
+
+      //var bubble_data = {};
+
+      //convert numerical values to objects
+      //bubble_data = data.map(function(d){ return {value: d}; });
+
+
+      //Sets up a hierarchy of data object
+      var root = d3.hierarchy({children:data})
+        .sum(function(d) { return d.value; })
+        .sort(function(a, b) { return b.value - a.value; });
+
+      //Once we have hierarchal data, run bubble generator
+      bubble(root);
+
+      //setup the chart
+      var bubbles = svg.selectAll(".bubble")
+          .data(root.children)
+          .enter();
+
+      //create the bubbles
+      bubbles.append("circle")
+          .attr("class", "circle")
+          .attr("r", function(d){ return d.r; })
+          .attr("cx", function(d){ return d.x; })
+          .attr("cy", function(d){ return d.y; })
+          .style("fill", function(d) { return color(d.value); });
+
+      //format the text for each bubble
+      bubbles.append("text")
+          .attr("x", function(d){ return d.x; })
+          .attr("y", function(d){ return d.y + 5; })
+          .attr("text-anchor", "middle")
+          .text(function(d){ return d.data.title; })
+          .style("fill","white")
+          .style("font-family", "Helvetica Neue, Helvetica, Arial, san-serif")
+          .style("font-size", "12px");
+
+    </script>
+  </body>
+</html>
